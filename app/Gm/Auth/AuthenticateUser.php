@@ -37,13 +37,10 @@ class AuthenticateUser
             return $this->getAuthorization();
 
 
-        //Authenticate user if code has been passed
+        //Authenticates or creates user if code has been passed
         $user = $this->userRepository->findOrCreateUserByUsername($this->getGithubUser());
 
-        //Login the user.
         \Auth::login($user, true);
-
-
 
         return $listener->handleAuthenticatedUser();
 

@@ -36,4 +36,33 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    /**
+     * Link to the projects that belong to the user.
+     *
+     */
+    public function projects()
+    {
+        return $this->hasMany('App\Project');
+    }
+
+    /**
+     * Link to the projects you have collaborated on.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function collaborations()
+    {
+        return $this->belongsToMany('App\Projects', 'collaborators', 'user_id', 'project_id')->withTimestamps();
+    }
+
+    /**
+     * Links to the tasks the user is assigned.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tasks()
+    {
+        return $this->hasMany('App\Task');
+    }
 }

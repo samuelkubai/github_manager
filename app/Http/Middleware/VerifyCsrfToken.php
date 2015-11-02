@@ -12,6 +12,8 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        //
+        '/store/project',
+        '/update/project/{project}',
+        '/create/task',
     ];
 }
